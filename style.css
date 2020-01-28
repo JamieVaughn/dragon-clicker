@@ -1,0 +1,40 @@
+ul li {
+    cursor: pointer;
+  }
+  main {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  div[data-id] {
+    margin: 1rem;
+    padding: 4px;
+    max-width: 150px;
+    border: 1px solid crimson;
+    border-radius: 2rem;
+  }
+  div div {
+    user-select: none;
+    font-size: 4rem;
+    cursor: pointer;
+  }
+  .Mountain div {
+    filter: hue-rotate(140deg) grayscale(.6) ;
+  }
+  .Sand div {
+    filter: sepia(1);
+  }
+  .Water div{
+    filter: hue-rotate(90deg) brightness(.8);
+  }
+  .Fire div {
+    filter: saturate(4) hue-rotate(290deg);
+  }
+  .Sky div {
+    filter: hue-rotate(90deg) brightness(1) drop-shadow(15px 0px 10px grey);
+  }
+  .Metallic div {
+    filter: grayscale(100);
+  }
+  .Fluffykins div {
+    filter: drop-shadow(-60px -10px 12px orangered) 
+  }
