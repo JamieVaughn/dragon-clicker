@@ -1,0 +1,66 @@
+$colors: white wheat tan rosybrown lightsalmon orange coral orangered crimson maroon;
+$sizes: .5 .55 .6 .65 .7 .75 .85 .95 1 1.1;
+
+@each $color in $colors {
+    $i: index($colors, $color) - 1;
+    div.level#{$i} {
+        background-color: $color;
+    }
+}
+@each $size in $sizes {
+    $i: index($sizes, $size) - 1;
+    div.level#{$i} {
+        transform: scale($size)
+    }
+    div.level#{$i} div span:first-child {
+        font-size: #{4 + ($i/2)}rem;
+    }
+}
+// div.level0 div {
+//     transform: scale(.6)
+//   }
+//   div.level1 div {
+//     background-color: tan;
+//     transform: scale(.65);
+
+//   }
+//   div.level2 div {
+//     background-color: pink;
+//     transform: scale(.7);
+
+//   }
+//   div.level3 div {
+//     background-color: rosybrown;
+//     transform: scale(.75);
+
+//   }
+//   div.level4 div {
+//     background-color: gold;
+//     transform: scale(.8);
+
+//   }
+//   div.level5 div {
+//     background-color: goldenrod;
+//     transform: scale(.85);
+
+//   }
+//   div.level6 div {
+//     background-color: orange;
+//     transform: scale(.9);
+
+//   }
+//   div.level7 div {
+//     background-color: coral;
+//     transform: scale(.95);
+
+//   }
+//   div.level8 div {
+//     background-color: orangered;
+//     transform: scale(1);
+
+//   }
+//   div.level9 div {
+//     background-color: crimson;
+//     transform: scale(1.1);
+
+//   }

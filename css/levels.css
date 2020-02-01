@@ -1,0 +1,130 @@
+div.level0 {
+  background-color: white;
+}
+
+div.level1 {
+  background-color: wheat;
+}
+
+div.level2 {
+  background-color: tan;
+}
+
+div.level3 {
+  background-color: rosybrown;
+}
+
+div.level4 {
+  background-color: lightsalmon;
+}
+
+div.level5 {
+  background-color: orange;
+}
+
+div.level6 {
+  background-color: coral;
+}
+
+div.level7 {
+  background-color: orangered;
+}
+
+div.level8 {
+  background-color: crimson;
+}
+
+div.level9 {
+  background-color: maroon;
+}
+
+div.level0 {
+  -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+}
+
+div.level0 div span:first-child {
+  font-size: 4rem;
+}
+
+div.level1 {
+  -webkit-transform: scale(0.55);
+          transform: scale(0.55);
+}
+
+div.level1 div span:first-child {
+  font-size: 4.5rem;
+}
+
+div.level2 {
+  -webkit-transform: scale(0.6);
+          transform: scale(0.6);
+}
+
+div.level2 div span:first-child {
+  font-size: 5rem;
+}
+
+div.level3 {
+  -webkit-transform: scale(0.65);
+          transform: scale(0.65);
+}
+
+div.level3 div span:first-child {
+  font-size: 5.5rem;
+}
+
+div.level4 {
+  -webkit-transform: scale(0.7);
+          transform: scale(0.7);
+}
+
+div.level4 div span:first-child {
+  font-size: 6rem;
+}
+
+div.level5 {
+  -webkit-transform: scale(0.75);
+          transform: scale(0.75);
+}
+
+div.level5 div span:first-child {
+  font-size: 6.5rem;
+}
+
+div.level6 {
+  -webkit-transform: scale(0.85);
+          transform: scale(0.85);
+}
+
+div.level6 div span:first-child {
+  font-size: 7rem;
+}
+
+div.level7 {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+div.level7 div span:first-child {
+  font-size: 7.5rem;
+}
+
+div.level8 {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+div.level8 div span:first-child {
+  font-size: 8rem;
+}
+
+div.level9 {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+div.level9 div span:first-child {
+  font-size: 8.5rem;
+}
+/*# sourceMappingURL=levels.css.map */
