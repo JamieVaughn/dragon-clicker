@@ -1,37 +1,38 @@
-
-  
-  const mainView = {
-    main: document.querySelector('main'),
-    init: function(){
-      this.main.innerHTML = ''
-    },
-    render(){
-      this.init()
-      this.main.innerHTML = this.template(controller.getDragons())
-    },
-    template(dragons){
-      return dragons.reduce((acc, dragon) => acc += `
-          <div class="${dragon.type}" data-id="${dragon.id}">
-            <h1>${dragon.type} Dragon</h1>
-            <div onclick='controller.increment(${dragon.id})'>
-          ${controller.checkDragon(dragon.type)}
-          <span>${dragon.clicks}</span></div>
-          </div>
-        `, '')
-    },
+var view = (function () {
+  var domStrings = {
+      list: '.list',
+      arena: '.arena'
   }
-  
-  const listView = {
-    list: document.querySelector('ul'),
-    init(){
-      this.list.innerHTML = ''
-    },
-    template(arr){
-      return arr.reduce((acc, cur) => acc += `
-          <li onclick='controller.dispatch("${cur}")'>${cur}</li>`, '')
-    },
-    render(){
-      this.init()
-      this.list.innerHTML = this.template(controller.getList())
-    }
+  return {
+      renderList: function (array) {
+          let listElement = document.querySelector(domStrings.list);
+          array.forEach(type => {
+              var listItem = document.createElement('li');
+              listItem.innerText = type;
+              listElement.appendChild(listItem);
+          })
+      },
+      renderDragon: function (dragon) {
+          let arena = document.querySelector(domStrings.arena);
+          let dragonCard = document.createElement('div');
+          let dragonName = document.createElement('div');
+          let dragonType = document.createElement('span');
+          let dragonCounter = document.createElement('span')
+          dragonCard.id = dragon.id;
+          dragonCard.classList.add(dragon.type)
+          dragonName.innerText = dragon.type
+          dragonType.innerText = '🐉';
+          dragonCounter.innerText = dragon.value;
+          dragonCard.append(dragonName, dragonType, dragonCounter),
+          // dragonCard.appendChild(dragonType),
+          // dragonCard.appendChild(dragonCounter),
+          arena.appendChild(dragonCard)
+      },
+      updateDragon: function (id, newVal) {
+          document.getElementById(id).lastChild.innerText = newVal;
+      },
+      getDOMstrings: function () {
+          return domStrings;
+      }
   }
+})();

@@ -1,10 +1,6 @@
 ul li {
     cursor: pointer;
   }
-  main {
-    display: flex;
-    flex-wrap: wrap;
-  }
   div[data-id] {
     margin: 1rem;
     padding: 4px;
@@ -12,29 +8,45 @@ ul li {
     border: 1px solid crimson;
     border-radius: 2rem;
   }
-  div div {
+  .arena {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .arena > div {
     user-select: none;
     font-size: 4rem;
     cursor: pointer;
+    margin: 1rem;
+    padding: 1rem;
+    border: 2px solid steelblue;
+    border-radius: 1rem;
+    text-align: center;
   }
-  .Mountain div {
+  .arena > div {
+    margin-top: 15px;
+  }
+  .arena > div span {
+    padding: 0 1rem;
+    user-select: none;
+  }
+  .Mountain span {
     filter: hue-rotate(140deg) grayscale(.6) ;
   }
-  .Sand div {
+  .Sand span {
     filter: sepia(1);
   }
-  .Water div{
+  .Water span {
     filter: hue-rotate(90deg) brightness(.8);
   }
-  .Fire div {
+  .Fire span {
     filter: saturate(4) hue-rotate(290deg);
   }
-  .Sky div {
+  .Sky span {
     filter: hue-rotate(90deg) brightness(1) drop-shadow(15px 0px 10px grey);
   }
-  .Metallic div {
+  .Metallic span {
     filter: grayscale(100);
   }
-  .Fluffykins div {
+  .Fluffykins span {
     filter: drop-shadow(-60px -10px 12px orangered) 
   }

@@ -1,36 +1,36 @@
-const controller = {
-    init() {
-        listView.render();
-        mainView.render();
-        setTimeout(() => alert('Click Dragons to display'), 200);
-    },
-    getDragons(callback = ()=>true){
-      return model.dragons.filter(d => callback(d))
-    },
-    getList(callback = ()=>true){
-      return model.list.filter(d => callback(d))
-    },
-    increment(id){
-      let cur = model.dragons.filter(d => d.id == id)[0]
-      cur.clicks += 1
-      mainView.render()
-    },
-    dispatch(type){
-      let dragon = {
-        id: model.dragons.length,
-        type: type,
-        clicks: 0
-      }
-      model.addDragon(dragon)
-      mainView.render()
-    },
-    sumClicks(callback){
-      let sum =  model.dragons.reduce((a, c) => a+=c.clicks, 0)
-      sumView.render(sum)
-    },
-    checkDragon(type){
-      return type ==='Fluffykins' ? '🐇':'🐉'
+var controller = (function (model, view) {
+    var DOM = view.getDOMstrings();
+    var render = function () {
+        view.renderList(model.list)
     }
-  }
+    var setUpListeners = function () {
+        document.querySelector(DOM.list).addEventListener('click', function (e) {
+            if (e.target.tagName === 'LI') {
+                model.addDragon(e.target.innerText);
+                view.renderDragon(model.dragons[model.dragons.length - 1])
+            }
+        })
+        document.querySelector(DOM.arena).addEventListener('click', (e) => {
+            console.log(e.target);
+            let id;
+            if(e.target.tagName === 'SECTION'){
+                return
+            }
+            else if (e.target.id) {
+                id = e.target.id;
+            } else if (e.target.parentNode.id) {
+                id = e.target.parentNode.id;
+            }
+            model.increment(id);
+            view.updateDragon(id, model.dragons[id].value);
+        })
+    }
+    return {
+        init: function () {
+            render();
+            setUpListeners();
+        },
+    }
+})(model, view);
 
-  controller.init()
+controller.init();
