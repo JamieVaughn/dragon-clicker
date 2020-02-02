@@ -74,6 +74,7 @@ const controller = {
       this.modifiers[property](id, newVal)
       mainView.render();
       listView.render();
+      sumView.render();
     },
     modifiers: {
       type: model.changeType,
@@ -87,7 +88,7 @@ const controller = {
     getSums(){
       return model.dragons.reduce((a, c) => {
         a.clicks += c.clicks
-        a.levels += c.level
+        a.levels += typeof c.level == 'number' ? c.level : 11
         return a;
       }, {clicks:0, levels:0})
     },
