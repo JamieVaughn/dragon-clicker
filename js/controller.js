@@ -27,7 +27,8 @@ const controller = {
       switch(flag){
         case 'modify':
           console.log(dragon)
-          let auth = prompt('Please enter password:', 'dragon')
+          let auth = prompt('Please enter password: (hint: dragon)', model.auth)
+          model.auth = auth
           if(auth == 'dragon'){
             adminView.render(Number(id))
           } else {
@@ -47,27 +48,28 @@ const controller = {
       model.addDragonToArena(model.dragons.find(d => d.id == dragon.id))
       mainView.render()
     },
-    submit(id) {
-        let form = document.querySelector('#modify')
-        // DOM selector way:
-        // let type = form.querySelector('#type').value
-        // let clicks = form.querySelector('#clicks').value
-        // let visible = form.querySelector('#visible').checked
-        // let deleted = form.querySelector('#deleted').checked
-        // this.modifyDragon(id, 'type', type)
-        // this.modifyDragon(id, 'clicks', clicks)
-        // this.modifyDragon(id, 'visible', visible)
-        // this.modifyDragon(id, 'deleted', deleted)
+    submit(e, id) {
+      e.preventDefault()
+      let form = document.querySelector('#modify')
+      // DOM selector way:
+      // let type = form.querySelector('#type').value
+      // let clicks = form.querySelector('#clicks').value
+      // let visible = form.querySelector('#visible').checked
+      // let deleted = form.querySelector('#deleted').checked
+      // this.modifyDragon(id, 'type', type)
+      // this.modifyDragon(id, 'clicks', clicks)
+      // this.modifyDragon(id, 'visible', visible)
+      // this.modifyDragon(id, 'deleted', deleted)
 
-        // new FormData Iterator way:
-        let it = new FormData(form).entries()
-        let data = it.next()
-        while(!data.done){
-          console.log(data.value, data.done)
-          this.modifyDragon(id, data.value[0], data.value[1])
-          data = it.next()
-        }
-        adminView.closeModal()
+      // new FormData Iterator way:
+      let it = new FormData(form).entries()
+      let data = it.next()
+      while(!data.done){
+        console.log(data.value, data.done)
+        this.modifyDragon(id, data.value[0], data.value[1])
+        data = it.next()
+      }
+      adminView.closeModal()
     },
     modifyDragon(id, property, newVal){
       console.log(id, property, newVal)

@@ -80,8 +80,8 @@
             <label for='deleted'>Delete Dragon
               <input type="checkbox" id='deleted' name='deleted' ${dragon.deleted ? 'checked': ''}/>
             </label>
+            <button onclick="controller.submit(event, ${dragon.id})">Submit ›</button>
           </form>
-          <button onclick="controller.submit(${dragon.id})">Submit ›</button>
         </main>
       </div>
       `

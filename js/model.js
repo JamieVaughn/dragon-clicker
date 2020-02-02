@@ -1,4 +1,7 @@
 const model = {
+// const model = function(){
+    // let self = this
+    auth: '',
     dragons: [
         {id: 0, type: "Forest", clicks: 0, level: 0, inArena: false, deleted: false},
         {id: 1, type: "Mountain", clicks: 0, level: 0, inArena: false, deleted: false},

@@ -36,6 +36,7 @@ div.level8 {
 
 div.level9 {
   background-color: maroon;
+  color:white;
 }
 
 div.level0 {
@@ -127,4 +128,3 @@ div.level9 {
 div.level9 div span:first-child {
   font-size: 8.5rem;
 }
-/*# sourceMappingURL=levels.css.map */
