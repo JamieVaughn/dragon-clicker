@@ -19,7 +19,9 @@ const model = {
         model.dragons.find(d => d.id == id).type = type
     },
     changeClicks(id, clicks){
-        model.dragons.find(d => d.id == id).clicks = Number(clicks)
+        let dragon = model.dragons.find(d => d.id == id)
+        dragon.clicks = Number(clicks)
+        dragon.level = controller.levelUp(Number(clicks)) || 'Maxed'
     },
     deleteDragon(id){
         model.dragons.find(d => d.id == id).deleted = true

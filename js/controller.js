@@ -29,7 +29,7 @@ const controller = {
           console.log(dragon)
           let auth = prompt('Please enter password:', 'dragon')
           if(auth == 'dragon'){
-            this.openAdmin(Number(id))
+            adminView.render(Number(id))
           } else {
             alert('Authentication failed.')
           }
@@ -46,9 +46,6 @@ const controller = {
       console.log(dragon)
       model.addDragonToArena(model.dragons.find(d => d.id == dragon.id))
       mainView.render()
-    },
-    openAdmin(id){
-      adminView.render(id)
     },
     submit(id) {
         let form = document.querySelector('#modify')
