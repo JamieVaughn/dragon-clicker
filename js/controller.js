@@ -5,7 +5,9 @@ const controller = {
         //setTimeout(() => alert('Click a Dragon to display'), 200);
     },
     getDragons(callback = ()=>true){
-      return model.dragons.filter(d => callback(d))
+      return model.dragons
+              .filter(d => callback(d))
+              // .sort((a,b) => b.clicks - a.clicks ) // Business Logic
     },
     getList(callback = ()=>true){
       return model.list.filter(d => callback(d))
@@ -25,7 +27,12 @@ const controller = {
       switch(flag){
         case 'modify':
           console.log(dragon)
-          this.openAdmin(Number(id))
+          let auth = prompt('Please enter password:', 'dragon')
+          if(auth == 'dragon'){
+            this.openAdmin(Number(id))
+          } else {
+            alert('Authentication failed.')
+          }
           break;
         case 'add':
           this.displayDragon(dragon)
@@ -37,15 +44,45 @@ const controller = {
     },
     displayDragon(dragon){
       console.log(dragon)
-      model.showDragon(model.dragons.find(d => d.id == dragon.id))
+      model.addDragonToArena(model.dragons.find(d => d.id == dragon.id))
       mainView.render()
     },
     openAdmin(id){
       adminView.render(id)
     },
-    modifyDragon(type){
-      console.log(type)
-      // model.addDragon(dragon)
+    submit(id) {
+        let form = document.querySelector('#modify')
+        // DOM selector way:
+        // let type = form.querySelector('#type').value
+        // let clicks = form.querySelector('#clicks').value
+        // let visible = form.querySelector('#visible').checked
+        // let deleted = form.querySelector('#deleted').checked
+        // this.modifyDragon(id, 'type', type)
+        // this.modifyDragon(id, 'clicks', clicks)
+        // this.modifyDragon(id, 'visible', visible)
+        // this.modifyDragon(id, 'deleted', deleted)
+
+        // new FormData Iterator way:
+        let it = new FormData(form).entries()
+        let data = it.next()
+        while(!data.done){
+          console.log(data.value, data.done)
+          this.modifyDragon(id, data.value[0], data.value[1])
+          data = it.next()
+        }
+        adminView.closeModal()
+    },
+    modifyDragon(id, property, newVal){
+      console.log(id, property, newVal)
+      this.modifiers[property](id, newVal)
+      mainView.render();
+      listView.render();
+    },
+    modifiers: {
+      type: model.changeType,
+      clicks: model.changeClicks,
+      deleted: model.deleteDragon, 
+      visible: model.showDragon
     },
     removeDragon(id){
       model.deleteDragon(model.dragons.find(d => d.id == id)[0])

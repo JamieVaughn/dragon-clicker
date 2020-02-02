@@ -56,26 +56,32 @@
   const adminView = {
     modal: document.querySelector('.modalMask'),
     init(){
-      this.modal.style.display = 'flex';
-      setTimeout(() => this.modal.classList.add('modalOpacity'), 10);
+      this.modal.style.display = 'flex'
+      setTimeout(() => this.modal.classList.add('modalOpacity'), 10)
     },
     closeModal() {
-      this.modal.classList.remove('modalOpacity');
-      setTimeout(()=>this.modal.style.display = 'none', 350);
+      this.modal.classList.remove('modalOpacity')
+      setTimeout(()=>this.modal.style.display = 'none', 350)
     },
     template(dragon){
       return `
       <div class="brandModal">
         <div class="closeModal" onclick="adminView.closeModal()">╳</div>
         <main>
-          <form class='flex'>
+          <form class='flex' id='modify' name='modify'>
             <h1 class='modalBold'>Modify ${dragon.type} Dragon</h1><br>
-            <label>Type</label><input type="text" value="${dragon.type}"/>
-            <label>Clicks</label><input type="text" value="${dragon.clicks}"/>
-            <label>Hide<input type="checkbox" value="${!dragon.inArena}"/></label>
-            <label>Delete Dragon<input type="checkbox" value="${dragon.deleted}"/></label>
+            <label for='type'>Type</label>
+            <input type="text" id='type' name='type' value="${dragon.type}"/>
+            <label for='clicks'>Clicks</label>
+            <input type="text" id='clicks' name='clicks' value="${dragon.clicks}"/>
+            <label for='visible'>Hide
+              <input type="checkbox" id='visible' name='visible' ${!dragon.inArena ? 'checked': ''}/>
+            </label>
+            <label for='deleted'>Delete Dragon
+              <input type="checkbox" id='deleted' name='deleted' ${dragon.deleted ? 'checked': ''}/>
+            </label>
           </form>
-          <button onclick="controller.modifyDragon(${dragon.id})">Submit ›</button>
+          <button onclick="controller.submit(${dragon.id})">Submit ›</button>
         </main>
       </div>
       `

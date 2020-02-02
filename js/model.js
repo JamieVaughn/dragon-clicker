@@ -15,10 +15,20 @@ const model = {
     addToList(name){
         this.list.push(name)
     },
-    deleteDragon(dragon){
-        dragon ? dragon.deleted = true : console.log('no dragon found')
+    changeType(id, type) {
+        model.dragons.find(d => d.id == id).type = type
     },
-    showDragon(dragon){
-        dragon ? dragon.inArena = true : console.log('no dragon displayed')
+    changeClicks(id, clicks){
+        model.dragons.find(d => d.id == id).clicks = Number(clicks)
+    },
+    deleteDragon(id){
+        model.dragons.find(d => d.id == id).deleted = true
+    },
+    showDragon(id, flag){
+        flag = flag == 'on' ? false : true;
+        model.dragons.find(d => d.id == id).inArena = flag
+    },
+    addDragonToArena(dragon, flag = true){
+        dragon ? dragon.inArena = flag : console.log('no dragon displayed')
     }
   }
