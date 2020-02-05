@@ -2,12 +2,12 @@ const controller = {
     init() {
         listView.render();
         mainView.render();
-        //setTimeout(() => alert('Click a Dragon to display'), 200);
+        setTimeout(() => alert('Click a Dragon to display'), 200);
     },
     getDragons(callback = ()=>true){
       return model.dragons
               .filter(d => callback(d))
-              // .sort((a,b) => b.clicks - a.clicks ) // Business Logic
+              .sort((a,b) => b.clicks - a.clicks ) // Business Logic
     },
     getList(callback = ()=>true){
       return model.list.filter(d => callback(d))
@@ -44,7 +44,7 @@ const controller = {
       mainView.render()
     },
     displayDragon(dragon){
-      console.log(dragon)
+      // console.log(dragon)
       model.addDragonToArena(model.dragons.find(d => d.id == dragon.id))
       mainView.render()
     },
@@ -62,7 +62,7 @@ const controller = {
       // this.modifyDragon(id, 'deleted', deleted)
 
       // new FormData Iterator way:
-      let it = new FormData(form).entries()
+      let it = new FormData(form).entries() // ["type", "toy"], ["clicks", 500]
       let data = it.next()
       while(!data.done){
         console.log(data.value, data.done)
