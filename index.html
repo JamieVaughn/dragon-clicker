@@ -25,5 +25,13 @@
       
     <div class="modalMask"></div>
       
+    <script>
+    fetch('./js/dragons.json').then(resp => {
+            console.log(resp)
+            return resp.json()
+        }).then(data => {
+            console.log(data)
+        })
+    </script>
 </body>
 </html>
