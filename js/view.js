@@ -1,14 +1,18 @@
   const mainView = {
     main: document.querySelector('main'),
     init: function(){
-      this.main.innerHTML = ''
+      this.main.innerHTML = '<p class="arena-placeholder">Dragon Arena</p>'
     },
     render(){
       this.init()
-      this.main.innerHTML = this.template(controller.getDragons((d)=>d.inArena))
+      if(controller.getDragons((d)=>d.inArena).length) {
+        this.main.innerHTML = this.template(controller.getDragons((d)=>d.inArena))
+      }
     },
     template(dragons){
-      return dragons.reduce((acc, dragon) => acc += `
+      return dragons.reduce((acc, dragon) => {
+        if (dragon.deleted) return acc
+        return acc += `
           <div class="${dragon.type} level${dragon.level}" data-id="${dragon.id}">
             <h1>${dragon.type} Dragon</h1>
             <h2>Level: ${dragon.level}</h2>
@@ -16,7 +20,8 @@
           <span>${controller.checkDragon(dragon.type)}</span>
           <span>${dragon.clicks}</span></div>
           </div>
-        `, '')
+        `
+      }, '')
     },
   }
   
@@ -28,13 +33,19 @@
     template(arr){
       return arr.reduce((acc, cur) => acc += `
           <li 
-          onclick='controller.dispatch("${cur.id}", "add")'
-          ondblclick='controller.dispatch("${cur.id}", "modify")'
+          draggable='true'
+          ondragstart='controller.drag(event, ${cur.id})'
+          oncontextmenu=''
+          data-id='${cur.id}'
           >${cur.type}</li>`, '')
     },
     render(){
       this.init()
       this.list.innerHTML = this.template(controller.getDragons((d)=>!d.deleted))
+      this.list.querySelectorAll('li').forEach(li => {
+        li.addEventListener('dragstart', e => e.currentTarget.classList.add('dragging'))
+      })
+      this.list.querySelectorAll('li').forEach(li => li.addEventListener('dragend', e => e.currentTarget.classList.remove('dragging')))      
     }
   }
 

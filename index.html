@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/levels.css">
     <script defer src='js/model.js'></script>
     <script defer src='js/view.js'></script>
@@ -13,24 +14,37 @@
     <title>Dragon Clicker</title>
 </head>
 <body>
+    <h1>Drag-n-Dropper</h1>
     <section>
-        <h1>Dragon Types</h1>
-        <ul>
+        <h2>Dragon Types</h2>
+        <ul oncontextmenu="controller.editDragons(event)">
         </ul>
         <h3 class='sum'></h3>
     </section>
     
-    <main class='arena'>
+    <main class='arena' 
+    ondragover='(e => e.preventDefault())(event)' 
+    ondragenter='(e => e.target.classList.add("dropping"))(event)'
+    ondragleave='(e => e.target.classList.remove("dropping"))(event)'
+    ondrop='controller.drop(event)'>
     </main>
       
     <div class="modalMask"></div>
-      
+    
+    <div class="menu" onmouseleave='controller.toggleMenu("none")' onmouseenter='controller.toggleMenu("block")'>
+        <div class="menu-options">
+            <div class="menu-option" onclick='controller.editDragon("edit")'>Edit</div>
+            <div class="menu-option" onclick='controller.editDragon("hide")'>Hide</div>
+            <div class="menu-option" onclick='controller.editDragon("delete")'>Delete</div>
+        </div>
+    </div>
+
     <script>
     fetch('./js/dragons.json').then(resp => {
-            console.log(resp)
+            console.dir(resp)
             return resp.json()
         }).then(data => {
-            console.log(data)
+            console.table(data.dragons)
         })
     </script>
 </body>

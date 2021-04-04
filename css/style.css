@@ -1,5 +1,6 @@
-h1, h2 {
+h1 {
   font-size: 3rem;
+  text-align: center;
 }
 h2 {
   font-size: 2rem;
@@ -12,19 +13,45 @@ ul {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1)
 }
 ul li {
-    cursor: pointer;
+    cursor: grab;
     list-style: none;
     font-size: 2rem;
     padding: 1rem;
     border: 1px solid crimson;
     border-radius: 4px;
+    user-select: none;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1)
+
+  }
+  ul li:active {
+    cursor: grabbing
+  }
+  ul li.dragging {
+    opacity: 0.5;
+    transform: scale(.9) perspective(20px) translate3d(0px, 500px, 100px);
+    background: mistyrose;
   }
   main.arena {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    border-radius: 8px;
+    border: 2px solid crimson;
+    user-select: none;
+  }
+  main.dropping {
+    border-style: dashed;
+    cursor: forbidden;
+  }
+  main.dropping li {
+    pointer-events: none;
+  }
+  main > p {
+    font-size: 5rem;
+    color: #999;
   }
   div[data-id] {
     margin: 0.25rem;

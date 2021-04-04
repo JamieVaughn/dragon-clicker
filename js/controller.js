@@ -2,12 +2,34 @@ const controller = {
     init() {
         listView.render();
         mainView.render();
-        setTimeout(() => alert('Click a Dragon to display'), 200);
+        setTimeout(() => alert('Drag a Dragon into the Arena'), 200);
     },
+    editDragons(e, flag) {
+      console.log(e.target.dataset.id)
+      if(e.target.dataset.id) {
+        e.preventDefault();
+        let menu = document.querySelector('.menu')
+        menu.style.left = `${e.pageX}px`;
+        menu.style.top = `${e.pageY}px`;
+        this.toggleMenu("block");
+        this.editDragon = (flag) => {
+          switch(flag) {
+            case "edit":
+              return controller.dispatch(e.target.dataset.id, 'modify')
+            case "hide":
+              return controller.modifyDragon(e.target.dataset.id, 'visible', 'on')
+            case "delete":
+              return controller.modifyDragon(e.target.dataset.id, 'deleted', true)
+          }
+        }
+        return false;
+      }
+    },
+    editDragon(flag) {},
     getDragons(callback = ()=>true){
       return model.dragons
               .filter(d => callback(d))
-              .sort((a,b) => b.clicks - a.clicks ) // Business Logic
+              // .sort((a,b) => b.clicks - a.clicks ) // Business Logic
     },
     getList(callback = ()=>true){
       return model.list.filter(d => callback(d))
@@ -27,6 +49,10 @@ const controller = {
       switch(flag){
         case 'modify':
           console.log(dragon)
+          if(!dragon.inArena) {
+            alert('This dragon has not been summoned yet. You must summon the dragon before you can edit it.')
+            return
+          }
           let auth = prompt('Please enter password: (hint: dragon)', model.auth)
           model.auth = auth
           if(auth == 'dragon'){
@@ -47,6 +73,15 @@ const controller = {
       // console.log(dragon)
       model.addDragonToArena(model.dragons.find(d => d.id == dragon.id))
       mainView.render()
+    },
+    drag(e) {
+      e.dataTransfer.setData('text/plain', e.currentTarget.dataset.id)
+    },
+    drop(e) {
+      e.preventDefault()
+      let id = e.dataTransfer.getData("text/plain")
+      document.querySelector('main.arena').classList.remove('dropping')
+      this.dispatch(id, "add")
     },
     submit(e, id) {
       e.preventDefault()
@@ -70,6 +105,14 @@ const controller = {
         data = it.next()
       }
       adminView.closeModal()
+    },
+    menuVisible: "none",
+    toggleMenu(command) {
+      console.log(command)
+      this.menuVisible = command
+      let menuStyle = document.querySelector('.menu').style
+      if(command === "block") menuStyle.display = this.menuVisible
+      if(command === "none") setTimeout(() => menuStyle.display = this.menuVisible, 1000)
     },
     modifyDragon(id, property, newVal){
       console.log(id, property, newVal)
