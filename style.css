@@ -1,6 +1,9 @@
 ul li {
     cursor: pointer;
+    padding: 0.5rem;
+    border: 1px solid silver;
   }
+  .list {display: flex; list-style: none; gap: 0.5rem;}
   div[data-id] {
     margin: 1rem;
     padding: 4px;
